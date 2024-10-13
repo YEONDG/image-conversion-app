@@ -26,9 +26,6 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
-const loq = '안녕?';
-const decodedFileloq = Buffer.from(loq, 'latin1').toString('utf8');
-console.log(decodedFileloq);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
@@ -41,10 +38,14 @@ ipcMain.handle(
       if (!fs.existsSync(outputDir)) {
         fs.mkdirSync(outputDir);
       }
+      const nameWithoutExtension = fileName.substring(
+        0,
+        fileName.lastIndexOf('.')
+      );
 
       const outputPath = path.join(
         outputDir,
-        `converted-${Date.now()}.${format}`
+        `${nameWithoutExtension}-${Date.now()}.${format}`
       );
       let transformer = sharp(buffer).toFormat(format);
 
