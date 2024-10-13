@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext", // 또는 다른 타겟
+    "module": "CommonJS", // CommonJS, ESNext 등으로 설정 가능
+    "jsx": "react-jsx",
+    "esModuleInterop": true, // 호환성을 위해 true로 설정
+    "strict": true, // 엄격한 타입 체크 옵션 (선택 사항)
+    "moduleResolution": "node",
+    "skipLibCheck": true, // 외부 라이브러리의 타입 검사 생략 (선택 사항)
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "typeRoots": ["./src/types", "./node_modules/@types"]
+  },
+  "include": ["src"]
+}
