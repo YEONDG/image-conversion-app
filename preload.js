@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 console.log('Preload script loaded');
 
 contextBridge.exposeInMainWorld('electron', {
-  convertImage: async (fileName, format, width, height, file) => {
+  convertImage: async (fileName, format, width, height, file, quality) => {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld('electron', {
       width,
       height,
       buffer,
+      quality,
     });
   },
 });

@@ -4,4 +4,5 @@ export type ImageFileType = {
   width?: number;
   height?: number;
   file: File;
+  quality: 'low' | 'medium' | 'high';
 };

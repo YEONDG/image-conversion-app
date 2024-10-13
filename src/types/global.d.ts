@@ -8,7 +8,8 @@ declare global {
         format: string,
         width?: number,
         height?: number,
-        file: File
+        file: File,
+        quality?: 'low' | 'medium' | 'high'
       ) => Promise<string>;
     };
   }

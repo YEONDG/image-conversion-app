@@ -1,5 +1,5 @@
 import React, { useState, DragEvent, ChangeEvent } from 'react';
-import { useImageStore } from '../store/useImageStore';
+import { useImageStore } from '@/src/store/useImageStore';
 
 interface ImageUploadDropProps {}
 
@@ -42,6 +42,7 @@ export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
           width: img.width,
           height: img.height,
           file,
+          quality: 'medium' as 'low' | 'medium' | 'high',
         };
       })
     );
@@ -66,6 +67,7 @@ export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
           width: img.width,
           height: img.height,
           file,
+          quality: 'medium' as 'low' | 'medium' | 'high',
         };
       })
     );
@@ -77,7 +79,7 @@ export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
   };
 
   return (
-    <div className='p-4 bg-green-50 h-96'>
+    <div className='p-4 bg-green-50'>
       <div
         onDragOver={handleDragOver}
         onDragEnter={handleDragEnter}

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ImageUploadDrop } from './components/image-upload-drop';
-import { ImageConverter } from './components/image-converter';
+import { ImageUploadDrop } from '@/src/components/image-upload-drop';
+import { ImageConverter } from '@/src/components/image-converter';
 import { Toaster } from 'sonner';
 
 const App = () => {

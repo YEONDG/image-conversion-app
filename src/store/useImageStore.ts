@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { ImageFileType } from '../types';
+import { ImageFileType } from '@/src/types';
 
 interface ImageStore {
   files: ImageFileType[];

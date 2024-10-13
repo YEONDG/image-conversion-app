@@ -23,6 +23,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, ''),
+    },
     extensions: ['.js', '.jsx', '.ts', '.tsx'], // 이 확장자들을 가진 파일을 처리합니다
   },
   plugins: [
