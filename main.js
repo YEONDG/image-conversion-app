@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Menu } = require('electron');
 const path = require('path');
 const sharp = require('sharp');
 const fs = require('fs');
@@ -17,6 +17,8 @@ const createWindow = () => {
   win.webContents.openDevTools();
 
   win.loadURL('http://localhost:3000');
+
+  Menu.setApplicationMenu(null);
 };
 
 app.whenReady().then(() => {
@@ -33,7 +35,6 @@ app.on('window-all-closed', () => {
 ipcMain.handle(
   'convert-image',
   async (event, { fileName, format, width, height, buffer, quality }) => {
-    console.log(quality, '퀄리티?');
     try {
       const outputDir = path.join(app.getPath('desktop'), 'ConvertedImages');
       if (!fs.existsSync(outputDir)) {
