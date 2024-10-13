@@ -12,8 +12,16 @@ export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
     setIsDragging(true);
   };
 
-  const handleDragLeave = () => {
-    setIsDragging(false);
+  const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+    const relatedTarget = e.relatedTarget as Node;
+    if (!e.currentTarget.contains(relatedTarget)) {
+      setIsDragging(false);
+    }
   };
 
   const handleDrop = async (e: DragEvent<HTMLDivElement>) => {
@@ -72,6 +80,7 @@ export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
     <div className='p-4 bg-green-50 h-96'>
       <div
         onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         className={`border-2 border-dashed p-8 text-center ${
