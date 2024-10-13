@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useImageStore } from '../store/useImageStore';
 import { ImageFileType } from '../types';
 import { CloudFog } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface ImageConverterProps {}
 
@@ -23,11 +24,9 @@ export const ImageConverter: React.FC<ImageConverterProps> = () => {
   }, []);
 
   const handleConvert = async () => {
-    console.log('click');
     try {
       await Promise.all(
         files.map(async (file) => {
-          console.log(file.name);
           if (!file.file || !(file.file instanceof File)) {
             throw new Error(
               'File data is missing or is not a valid File object'
@@ -45,10 +44,10 @@ export const ImageConverter: React.FC<ImageConverterProps> = () => {
         })
       );
 
-      setConversionSuccess(true);
+      toast.success('생성 완료');
     } catch (error) {
       console.error('Image conversion failed:', error);
-      setConversionSuccess(false);
+      toast.error('생성 실패');
     }
   };
 
