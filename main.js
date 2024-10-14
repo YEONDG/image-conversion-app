@@ -9,14 +9,15 @@ const createWindow = () => {
     height: 900,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: false,
       contextIsolation: true,
+      nodeIntegration: true,
+      enableRemoteModule: true,
     },
   });
 
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
-  win.loadURL('http://localhost:3000');
+  win.loadFile(path.join(__dirname, 'dist', 'index.html'));
 
   Menu.setApplicationMenu(null);
 };
@@ -32,6 +33,7 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
 });
+
 ipcMain.handle(
   'convert-image',
   async (event, { fileName, format, width, height, buffer, quality }) => {

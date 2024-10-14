@@ -6,14 +6,54 @@
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "electron": "electron ."
+    "electron": "electron .",
+    "deploy:win": "npm run deploy:win32 && npm run deploy:win64",
+    "deploy:win32": "electron-builder --win nsis:ia32",
+    "deploy:win64": "electron-builder --win nsis:x64"
   },
-  "keywords": [],
+  "build": {
+    "productName": "이미지변환앱",
+    "appId": "net.jetalab.ex.startelectron",
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "shortcutName": "이미지변환",
+      "artifactName": "이미지변환${version}.${ext}",
+      "uninstallDisplayName": "이미지변환",
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "installerLanguages": [
+        "en_US",
+        "ko_KR"
+      ],
+      "language": "1042"
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./build/",
+      "app": "."
+    }
+  },
+  "keywords": [
+    "이미지변환",
+    "electron",
+    "image",
+    "optimizer"
+  ],
   "author": "ydg",
   "license": "MIT",
-  "description": "이미지 최적화 앱",
+  "description": "이미지 변환 앱",
   "compilerOptions": {
     "jsx": "react-jsx"
   },
@@ -23,7 +63,6 @@
     "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
-    "electron-squirrel-startup": "^1.0.1",
     "lucide-react": "^0.452.0",
     "next-themes": "^0.3.0",
     "react": "^18.3.1",
@@ -41,13 +80,6 @@
     "@babel/preset-env": "^7.25.8",
     "@babel/preset-react": "^7.25.7",
     "@babel/preset-typescript": "^7.25.7",
-    "@electron-forge/cli": "^7.5.0",
-    "@electron-forge/maker-deb": "^7.5.0",
-    "@electron-forge/maker-rpm": "^7.5.0",
-    "@electron-forge/maker-squirrel": "^7.5.0",
-    "@electron-forge/maker-zip": "^7.5.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
-    "@electron-forge/plugin-fuses": "^7.5.0",
     "@electron/fuses": "^1.8.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
@@ -55,7 +87,9 @@
     "babel-loader": "^9.2.1",
     "css-loader": "^7.1.2",
     "electron": "^32.2.0",
+    "electron-builder": "^25.1.8",
     "html-webpack-plugin": "^5.6.0",
+    "node-loader": "^2.0.0",
     "postcss": "^8.4.47",
     "postcss-loader": "^8.1.1",
     "style-loader": "^4.0.0",

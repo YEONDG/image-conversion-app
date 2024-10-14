@@ -7,6 +7,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // 빌드된 파일이 저장될 위치
     filename: 'bundle.js', // 출력 파일 이름
   },
+  target: 'electron-main',
+  externals: {
+    sharp: 'commonjs sharp',
+  },
   module: {
     rules: [
       {
@@ -38,6 +42,6 @@ module.exports = {
       directory: path.join(__dirname, 'dist'), // 개발 서버에서 제공할 폴더
     },
     compress: true,
-    port: 3000, // 개발 서버 포트
+    port: 3000,
   },
 };
