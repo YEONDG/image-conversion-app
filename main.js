@@ -47,9 +47,16 @@ ipcMain.handle(
         fileName.lastIndexOf('.')
       );
 
+      const date = new Date();
+
+      const year = String(date.getFullYear()).slice(2);
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const milliseconds = String(date.getMilliseconds()).padStart(3, '0');
+
       const outputPath = path.join(
         outputDir,
-        `${nameWithoutExtension}-${Date.now()}.${format}`
+        `${nameWithoutExtension}-${year}${month}${day}-${milliseconds}.${format}`
       );
 
       let transformer;
