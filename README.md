@@ -21,7 +21,7 @@
 ```bash
 // 저장소 클론
 
-git clone https://github.com/username/image-optimizer.git
+git clone https://github.com/YEONDG/image-optimizer.git
 cd image-optimizer
 ```
 
