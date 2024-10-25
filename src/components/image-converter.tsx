@@ -86,31 +86,35 @@ export const ImageConverter = () => {
         </div>
         <div className='mb-2'>
           <label className='block text-gray-700 mb-2'>
-            Resize Width (optional)
+            Resize Width (optional) 1px ~ 4000px
           </label>
           <input
             type='number'
             value={resizeWidth}
-            onChange={(e) =>
-              setResizeWidth(
-                e.target.value === '' ? '' : parseInt(e.target.value)
-              )
-            }
+            onChange={(e) => {
+              const value =
+                e.target.value === '' ? '' : parseInt(e.target.value);
+              if (value === '' || (value >= 1 && value <= 4000)) {
+                setResizeWidth(value);
+              }
+            }}
             className='border rounded p-1 w-full'
           />
         </div>
         <div className='mb-2'>
           <label className='block text-gray-700 mb-2'>
-            Resize Height (optional)
+            Resize Height (optional) 1px ~ 4000px
           </label>
           <input
             type='number'
             value={resizeHeight}
-            onChange={(e) =>
-              setResizeHeight(
-                e.target.value === '' ? '' : parseInt(e.target.value)
-              )
-            }
+            onChange={(e) => {
+              const value =
+                e.target.value === '' ? '' : parseInt(e.target.value);
+              if (value === '' || (value >= 1 && value <= 4000)) {
+                setResizeHeight(value);
+              }
+            }}
             className='border rounded p-1 w-full'
           />
         </div>

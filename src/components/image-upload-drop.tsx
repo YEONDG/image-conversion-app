@@ -109,7 +109,7 @@ export const ImageUploadDrop = () => {
       </div>
       <div className='mt-4'>
         <h3 className='font-semibold'>Uploaded Files</h3>
-        <ul className='flex pl-5 gap-4'>
+        <ul className='flex gap-2'>
           {imageFiles.map((file, index) => (
             <li
               key={index}
