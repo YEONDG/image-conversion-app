@@ -1,4 +1,4 @@
-# Image Optimizer
+# Image Conversion App
 
 이미지 변환 앱(Image Optimizer)은 Electron과 React 기반으로, sharp 라이브러리를 사용하여 다양한 이미지 포맷과 품질을 설정하고 이미지를 변환할 수 있는 데스크톱 애플리케이션입니다.
 
