@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "start": "webpack serve --mode development",
+    "start": "webpack serve --mode=development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "electron": "electron .",
+    "electron:dev": "concurrently --kill-others-on-fail \"npm run start\" \"cross-env NODE_ENV=development electron .\"",
+    "electron:prod": "cross-env NODE_ENV=production electron .",
     "deploy:xos": "electron-builder --mac",
     "deploy:win32": "electron-builder --win nsis:ia32",
     "deploy:win64": "electron-builder --win nsis:x64"
@@ -57,20 +58,21 @@
   },
   "keywords": [
     "이미지변환",
-    "electron",
     "image",
-    "optimizer"
+    "optimizer",
+    "electron",
+    "electron-app",
+    "image-optimization",
+    "image-converter",
+    "sharp",
+    "electron-builder",
+    "cross-platform",
+    "desktop-app"
   ],
   "author": "ydg",
   "license": "MIT",
   "description": "이미지 변환 앱",
-  "compilerOptions": {
-    "jsx": "react-jsx"
-  },
   "dependencies": {
-    "@hookform/resolvers": "^3.9.0",
-    "@radix-ui/react-label": "^2.1.0",
-    "@radix-ui/react-slot": "^1.1.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.452.0",
@@ -95,6 +97,8 @@
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
     "babel-loader": "^9.2.1",
+    "concurrently": "^9.0.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^7.1.2",
     "electron": "^32.2.0",
     "electron-builder": "^25.1.8",

@@ -14,10 +14,14 @@ const createWindow = () => {
       enableRemoteModule: true,
     },
   });
+  const isDev = process.env.NODE_ENV === 'development';
 
-  // win.webContents.openDevTools();
-
-  win.loadFile(path.join(__dirname, 'dist', 'index.html'));
+  if (isDev) {
+    win.loadURL('http://localhost:3000');
+    win.webContents.openDevTools();
+  } else {
+    win.loadFile(path.join(__dirname, 'dist/index.html'));
+  }
 
   Menu.setApplicationMenu(null);
 };

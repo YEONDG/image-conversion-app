@@ -1,9 +1,7 @@
 import React, { useState, DragEvent, ChangeEvent } from 'react';
 import { useImageStore } from '@/src/store/useImageStore';
 
-interface ImageUploadDropProps {}
-
-export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
+export const ImageUploadDrop = () => {
   const { files: imageFiles, setFiles: setImageFiles } = useImageStore();
   const [isDragging, setIsDragging] = useState<boolean>(false);
 
@@ -110,12 +108,12 @@ export const ImageUploadDrop: React.FC<ImageUploadDropProps> = () => {
         </label>
       </div>
       <div className='mt-4'>
-        <h3 className='font-semibold'>Uploaded Files:</h3>
-        <ul className='flex list-disc pl-5 gap-4'>
+        <h3 className='font-semibold'>Uploaded Files</h3>
+        <ul className='flex pl-5 gap-4'>
           {imageFiles.map((file, index) => (
             <li
               key={index}
-              className='text-gray-800'
+              className='text-gray-800 hover:bg-gray-300 p-2 rounded'
               onClick={() => handleFileClick(index)}
             >
               {file.name}

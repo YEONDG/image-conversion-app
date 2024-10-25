@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useImageStore } from '@/src/store/useImageStore';
 import { toast } from 'sonner';
 
-interface ImageConverterProps {}
-
-export const ImageConverter: React.FC<ImageConverterProps> = () => {
+export const ImageConverter = () => {
   const { files } = useImageStore();
   const [conversionFormat, setConversionFormat] = useState<string>('jpeg');
   const [resizeWidth, setResizeWidth] = useState<number | ''>('');
@@ -22,6 +20,11 @@ export const ImageConverter: React.FC<ImageConverterProps> = () => {
   }, []);
 
   const handleConvert = async () => {
+    if (!files || files.length === 0) {
+      toast.error('변환할 파일이 없습니다.');
+      return;
+    }
+
     try {
       await Promise.all(
         files.map(async (file) => {
@@ -51,71 +54,73 @@ export const ImageConverter: React.FC<ImageConverterProps> = () => {
   };
 
   return (
-    <div className='p-4 border-t mt-4'>
-      <div className='mb-2'>
-        <label className='block text-gray-700 mb-2'>변환할 확장자</label>
-        <select
-          value={conversionFormat}
-          onChange={(e) => setConversionFormat(e.target.value)}
-          className='border rounded p-2 w-full'
+    <div>
+      <div className='grid grid-cols-2 gap-4 p-4 border-t mt-4'>
+        <div className='mb-2'>
+          <label className='block text-gray-700 mb-2'>변환할 확장자</label>
+          <select
+            value={conversionFormat}
+            onChange={(e) => setConversionFormat(e.target.value)}
+            className='border rounded p-1 w-full'
+          >
+            <option value='jpeg'>JPEG</option>
+            <option value='jpg'>JPG</option>
+            <option value='png'>PNG</option>
+            <option value='webp'>WEBP</option>
+            <option value='avif'>AVIF</option>
+          </select>
+        </div>
+        <div className='mb-2'>
+          <label className='block text-gray-700 mb-2'>퀄리티</label>
+          <select
+            value={quality}
+            onChange={(e) =>
+              setQuality(e.target.value as 'low' | 'medium' | 'high')
+            }
+            className='border rounded p-1 w-full'
+          >
+            <option value='low'>저화질</option>
+            <option value='medium'>중간</option>
+            <option value='high'>고화질</option>
+          </select>
+        </div>
+        <div className='mb-2'>
+          <label className='block text-gray-700 mb-2'>
+            Resize Width (optional)
+          </label>
+          <input
+            type='number'
+            value={resizeWidth}
+            onChange={(e) =>
+              setResizeWidth(
+                e.target.value === '' ? '' : parseInt(e.target.value)
+              )
+            }
+            className='border rounded p-1 w-full'
+          />
+        </div>
+        <div className='mb-2'>
+          <label className='block text-gray-700 mb-2'>
+            Resize Height (optional)
+          </label>
+          <input
+            type='number'
+            value={resizeHeight}
+            onChange={(e) =>
+              setResizeHeight(
+                e.target.value === '' ? '' : parseInt(e.target.value)
+              )
+            }
+            className='border rounded p-1 w-full'
+          />
+        </div>
+        <button
+          onClick={handleConvert}
+          className='bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'
         >
-          <option value='jpeg'>JPEG</option>
-          <option value='jpg'>JPG</option>
-          <option value='png'>PNG</option>
-          <option value='webp'>WEBP</option>
-          <option value='avif'>AVIF</option>
-        </select>
+          Convert Images
+        </button>
       </div>
-      <div className='mb-2'>
-        <label className='block text-gray-700 mb-2'>퀄리티</label>
-        <select
-          value={quality}
-          onChange={(e) =>
-            setQuality(e.target.value as 'low' | 'medium' | 'high')
-          }
-          className='border rounded p-2 w-full'
-        >
-          <option value='low'>저화질</option>
-          <option value='medium'>중간</option>
-          <option value='high'>고화질</option>
-        </select>
-      </div>
-      <div className='mb-2'>
-        <label className='block text-gray-700 mb-2'>
-          Resize Width (optional):
-        </label>
-        <input
-          type='number'
-          value={resizeWidth}
-          onChange={(e) =>
-            setResizeWidth(
-              e.target.value === '' ? '' : parseInt(e.target.value)
-            )
-          }
-          className='border rounded p-2 w-full'
-        />
-      </div>
-      <div className='mb-2'>
-        <label className='block text-gray-700 mb-2'>
-          Resize Height (optional):
-        </label>
-        <input
-          type='number'
-          value={resizeHeight}
-          onChange={(e) =>
-            setResizeHeight(
-              e.target.value === '' ? '' : parseInt(e.target.value)
-            )
-          }
-          className='border rounded p-2 w-full'
-        />
-      </div>
-      <button
-        onClick={handleConvert}
-        className='bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600'
-      >
-        Convert Images
-      </button>
     </div>
   );
 };
